@@ -1,40 +1,12 @@
 #!/bin/bash
-#add fix to exercise5-server1 here
-cd /home/vagrant/.ssh/
-echo "Host server2
-    HostName server2
-    IdentityFile ~/.ssh/server2.key
-	" > /home/vagrant/.ssh/config
-echo "-----BEGIN RSA PRIVATE KEY-----
-MIIEogIBAAKCAQEAsesRcJcdYe8WetDZXhr53iIoQVyQAUGVyT95eBcNnXHPCJqX
-kS7pfSxlwFiQS0nBNXlWVt0yvJn9ocWQLi060IvTzDGNdCudsrFvTZVM/lAaoHNA
-cpXS5Zo2kqHnOjSRdR5212h8Z/Et89xzJVb1I9sVKSi8+yhYQ6Sx7qlNRjPfGFDB
-EDjgeMYvFNOydtrBiPenSXmxr//7FW1UGc1na92/b43UK90SwOxhYiDhrXlDdFR9
-U1XY7jVwGBnXcYNVyDIwwhtqPYKWlJS4sBlKKUpTFIQ7/a0rAfaEzjmQ0YLyxfT9
-RltRdHHT8NP8Uop3fEIpEZ6qkbhNjqHGyj+fcwIDAQABAoIBACdSIGSVwTSntnwm
-NCQMKjThr6viXSEp8YSstpfH4IZvZKYuJFk92PSFH2fHKvy4rC65Rk+kS1ZLYjai
-hx7teBYnEQQL34tRKGUZudOXr5B0+62CSzgHzLhZwL3fck721z7fILyypuwB7Xn7
-uqcB9OObw615B2sqm3c3qutoF1/wMBjzSk+6+kPE0KOSTftNKcW376jeMPKuoGy3
-hP5ytKNetGiuihSU2Tnavchb08qaS6Ukg9SZ9ujHeOtfuClTNENcV0GhhxHyJz8u
-M0Mewj0A55LBNHOvsp95rrer8JjOP9t1bOyur9KcA2aoYfq40HYgjoY5ZHZFs9oU
-dN+tkiECgYEA6ooo6yE8kbxjqgtVllrQqwahyxwukZ40gBnJ1kgbkv3PMyxJzoR+
-Ix2/Wyn6LYyQ9Kb7e0lcWS5VeAaneb7p0RgXUGn9HXTQ6eVAPkh7Qh7nvqUVbgK3
-UaZ0GAc1p7E79qi/o/HL8swHBLMNEwgVq8/WwTK8MdqBYISLwWTbcH8CgYEAwjKc
-koEY1aayVNBQ5+fO5OX9iHSYghz5BrH4uVAJ3aed/92wtTbWYou0WRgYocZONzLe
-QgBmB7mul19qhtNqQ3VX/AXz3kqLwkuMbafYwg2U6Dgh+BnaYIxJQvh1GDLAAmBH
-Xs67+MIVcM+z8+lWaNr98+AooLyw1/mbluRAlw0CgYA8AEhjjscuCWH92JR2uJj1
-h+bQTU9klXKc6vwFw8C6JBBj6QqguKiEV1HjAqQsDu/uhuGDMstbTU00PY+Ox9aN
-VXpxagwFAyOHEs0SofxWeA2VaipHUI6RZuIAW6fQVLkgax9L08n3PVb2TtAjdEgH
-Ak7QcihPILVEeeQ+/4xcBQKBgHPfPw0remYA0OdKZPv6lLh/goepClaYcv5Lstzf
-pQNcwCmrXYTC86hZM4L1nbzpVkIZWASJuFdjs4kepbFM9FrL6XO3GYvJbxq/eUr0
-m6Et+WuWEq62vlZdXllXZobJwUepquwm7oG/TIvDYtxmnehywpSBa7x82ggEJ5Ih
-H2kBAoGAPz9p/tqTwzBu6CZWdS0nyRUGDb9XLill1DjjHhzND8+HHQnw0zvXg6+R
-/g1iZw3YiKh/64JMulpF4YuBcFqrxEuUbSknC4JF5G8QNy++1AgolsMnng2lIEVZ
-eYINauMEurZeJWXAYErTfFUQh0YDMBSyagz4lFoIVep5Kh+vkCI=
------END RSA PRIVATE KEY-----
-" > /home/vagrant/.ssh/server2.key
-sudo chmod 600 /home/vagrant/.ssh/server2.key
-echo "|1|LSEKfDa82qDPqqWH29igXX/1dHI=|PBk6YSsS0kb35Af3GNAfByU7NoA= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDlXGuis5FtKDLaVf3YoCMjRrrX2Q3XtcbTPlAmCQGa6ri1/QYVAEuFDKRFFhoTyCOngBugvSom63ZHmKRS2Zgc=
-|1|hgxZiH2Dxr2clr3B7P2NZbolfZU=|wPo/crsY/z+PjSvkzNlo0ZCb4sc= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDlXGuis5FtKDLaVf3YoCMjRrrX2Q3XtcbTPlAmCQGa6ri1/QYVAEuFDKRFFhoTyCOngBugvSom63ZHmKRS2Zgc=
-" > /home/vagrant/.ssh/known_hosts
-sudo service ssh restart
+#add fix to exercise5-server2 here
+echo "#!/bin/bash
+sudo apt-get install sshpass -y
+ssh-keygen -f /home/vagrant/.ssh/id_rsa -t rsa -N '' -q
+ssh-keyscan -H server2 >> ~/.ssh/known_hosts
+sshpass -p 'vagrant' ssh-copy-id vagrant@server2
+" > ./myscript.sh
+sudo export VISUAL=vim
+sudo export EDITOR=vim
+sudo chmod +x /home/vagrant/myscript.sh
+echo '@reboot sleep 120 && /home/vagrant/myscript.sh' | crontab -
